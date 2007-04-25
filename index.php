@@ -36,7 +36,7 @@ if ($_REQUEST['debug'] == 'yes' || $error) {
 }
 
 // Handle cache of old/current IP address
-$cacheFile = $cacheDir . '/' . basename($hostname);
+$cacheFile = $cacheDir . '/' . basename($config['hostname']);
 
 if (is_readable($cacheFile)) {
     $config['old_ip'] = trim(file_get_contents($cacheFile));
