@@ -1,8 +1,6 @@
 <?php
 # nsupdate web-interface
-#
 # $Id$
-#
 # Karl-Martin Skontorp <kms@skontorp.net>
 
 header("Content-Type: text/plain");
