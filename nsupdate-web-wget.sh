@@ -8,9 +8,9 @@ WGET=/usr/bin/wget
 
 URL="http://skontorp.net/nsupdate-web/"
 HOSTNAME="hermelin.skontorp.net"
-TTL="30"
-KEY="dZX5yu2wnZ/yavpxpMmUwZuGbPdwPonegkCzCD3VU9kZ5rKDeCePyx9aJg%2btbmDFSgWkM5cJDctoF5d3MmpRi"
-IP=""
+TTL="30" # Seconds TTL
+KEY="xxx" # Remember to URL encode this!
+IP="" # Default
 
 # Execute
 PARAMS="?hostname=$HOSTNAME&ttl=$TTL&key=$KEY&ip=$IP"
