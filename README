@@ -1,3 +1,5 @@
 nsupdate web-interface
 $Id$
 Karl-Martin Skontorp <kms@skontorp.net>
+
+A simple system for updating DNS records.
