@@ -1,7 +1,9 @@
 #!/bin/sh
-# nsupdate web-interface
-# $Id$
-# Karl-Martin Skontorp <kms@skontorp.net>
+# nsupdate-web
+# Updates BIND records.
+#
+# (c) Karl-Martin Skontorp <kms@skontorp.net> ~ http://picofarad.org/
+# Licensed under the GNU GPL 2.0 or later.
 
 # Crude examples
 
