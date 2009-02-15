@@ -80,12 +80,12 @@ if (is_resource($process)) {
     fclose($pipes[0]);
 
     while ($s = fgets($pipes[1], 1024)) {
-	$errors .= 'STDOUT: ' . $s;
+        $errors .= 'STDOUT: ' . $s;
     }
     fclose($pipes[1]);
 
     while ($s = fgets($pipes[2], 1024)) {
-	$errors .= 'STDERR: ' . $s;
+        $errors .= 'STDERR: ' . $s;
     }
     fclose($pipes[2]);
 
@@ -103,13 +103,13 @@ if ($returnValue != 0) {
 
     // Update cache
     if (is_writable($cacheFile)
-	|| (!file_exists($cacheFile) && is_writeable($cacheDir))) {
-	$f = fopen($cacheFile, 'w');
-	fwrite($f, $config['ip']);
-	fclose($f);
-	echo "Cache updated!\n";
+        || (!file_exists($cacheFile) && is_writeable($cacheDir))) {
+        $f = fopen($cacheFile, 'w');
+        fwrite($f, $config['ip']);
+        fclose($f);
+        echo "Cache updated!\n";
     } else {
-	echo "Error: Cache not updated!\n";
+        echo "Error: Cache not updated!\n";
     }
 }
 
