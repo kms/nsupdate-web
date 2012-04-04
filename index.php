@@ -19,43 +19,43 @@ $dnsServer = '127.0.0.1';
 $cacheDir = '/tmp/nsupdate-cache'; // chmod 777 this
 $default = array(
     'ip' => $_SERVER['REMOTE_ADDR'],
-	'ttl' => 60,
-	'key' => 'ddns-key abcdef123456789=',
+    'ttl' => 60,
+    'key' => 'ddns-key abcdef123456789=',
 );
 
 // GET/POST parameters
 $config = array(
-	'hostname' => $_REQUEST['hostname'],
-	'key' => $_REQUEST['key'],
-	'ttl' => $_REQUEST['ttl'],
-	'ip' => $_REQUEST['ip'],
+    'hostname' => $_REQUEST['hostname'],
+    'key' => $_REQUEST['key'],
+    'ttl' => $_REQUEST['ttl'],
+    'ip' => $_REQUEST['ip'],
 );
 
 // Handling of missing parameters
 $error = 0;
 foreach ($config as $k => $v) {
-	$error |= empty($v) && empty($default[$k]);
+    $error |= empty($v) && empty($default[$k]);
 }
 
 if (empty($config['hostname']) && empty($default['hostname'])) {
-	echo "nohost\n";
-	exit;
+    echo "nohost\n";
+    exit;
 }
 elseif ($error) {
-	echo "911\n";
-	echo "Error: Missing parameters with no defaults\n\n";
+    echo "911\n";
+    echo "Error: Missing parameters with no defaults\n\n";
     print_r($config);
     exit;
 }
 elseif (isset($_REQUEST['debug'])) {
-	print_r($config);
+    print_r($config);
     exit;
 }
 
 // Default params
 foreach ($config as $k => $v) {
-	if (empty($v))
-		$config[$k] = $default[$k];
+    if (empty($v))
+        $config[$k] = $default[$k];
 }
 
 // Handle cache of old/current IP address
@@ -67,7 +67,7 @@ if (is_readable($cacheFile)) {
 
 // Exit now unless IP address is new
 if ($config['old_ip'] == $config['ip']) {
-	echo 'nochg ' . $config['ip'] . "\n"; // dyndns compatible output
+    echo 'nochg ' . $config['ip'] . "\n"; // dyndns compatible output
     exit;
 }
 
@@ -94,17 +94,17 @@ if (is_resource($process)) {
     fwrite($pipes[0], $nsupdateCommands);
     fclose($pipes[0]);
 
-	$prefix = 'STDOUT: ';
+    $prefix = 'STDOUT: ';
     while ($s = fgets($pipes[1], 1024)) {
         $errors .= $prefix . $s;
-		$prefix = '';
+        $prefix = '';
     }
     fclose($pipes[1]);
 
-	$prefix = 'STDERR: ';
+    $prefix = 'STDERR: ';
     while ($s = fgets($pipes[2], 1024)) {
         $errors .= $prefix . $s;
-		$prefix = '';
+        $prefix = '';
     }
     fclose($pipes[2]);
 
@@ -115,19 +115,19 @@ if (is_resource($process)) {
 
 // Output errors if unsuccessfull, else update cache
 if ($returnValue != 0) {
-	echo "dnserr\n" . $errors;
-	exit;
+    echo "dnserr\n" . $errors;
+    exit;
 }
 echo 'good ' . $config['ip'] . "\n";
 
 // Update cache
 if (is_writable($cacheFile)
-	|| (!file_exists($cacheFile) && is_writeable($cacheDir))) {
-	$f = fopen($cacheFile, 'w');
-	fwrite($f, $config['ip']);
-	fclose($f);
+    || (!file_exists($cacheFile) && is_writeable($cacheDir))) {
+    $f = fopen($cacheFile, 'w');
+    fwrite($f, $config['ip']);
+    fclose($f);
 } else {
-	echo "Error: Cache not updated!\n";
+    echo "Error: Cache not updated!\n";
 }
 
 ?>
